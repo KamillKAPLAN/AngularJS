@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="../angular.min.js"></script>
+  </head>
+  <body>
+    <!--
+      ng-app    : AngularJs'de çalışılacak block
+      ng-model  : Modelimiz
+      ng-bind   : Tanımlanan modele baglanan alan
+      ng-init   : AngularJs'de kullanılacak değişkenlerin tanımlandığı yer
+      {{ }}     : AngularJs'de ifadeleri tanımlama şeklidir.
+      ng-repeat : AngularJs'de dataları tek tek dolaşır.Ayni foreach’de olduğı gibi dizi içinde dolaşıp tüm elemanlara ulaşabiliriz
+    -->
+    <div ng-app = "" ng-init = " garaj = [
+     {brand : 'Kawasaki', country : 'Japan'}, {brand : 'Honda', country : 'Japan'},
+     {brand : 'Suzuki', country : 'Japan'}, {brand : 'Ducati', country:'Italy'},
+     {brand : 'Harley Davidson', country : 'USA'},{brand : 'Bmw', country : 'Germany'} ]">
+        <ul>
+          <li ng-repeat = " x in garaj">
+            {{ x.brand + ' ' + x.country }}
+          </li>
+        </ul>
+    </div>
+  </body>
+</html>

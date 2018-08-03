@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="../angular.min.js"></script>
+  </head>
+  <body>
+    <!--
+      ng-app    : AngularJs'de çalışılacak block
+      ng-model  : Modelimiz
+      ng-bind   : Tanımlanan modele baglanan alan
+      ng-init   : AngularJs'de kullanılacak değişkenlerin tanımlandığı yer
+      {{ }}     : AngularJs'de ifadeleri tanımlama şeklidir.
+    -->
+    <div ng-app="" ng-init="depo = {miktar : 1, fiyat : 8};">
+      <p>Adet: <input type="number" ng-model="depo.miktar"></p>
+      <p>Fiyat: <input type="number" ng-model="depo.fiyat"></p>
+      <p>Ödenecek: {{ depo.miktar * depo.fiyat }}</p>
+    </div>
+  </body>
+</html>

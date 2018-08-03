@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="../angular.min.js"></script>
+    <!--
+      Model View Controller veya yaygın olarak adlandırılan MVC, web uygulamaları geliştirmek için bir yazılım tasarım
+      modelidir. Bir Model Görünüm Kontrolörü (MVC) üç parçadan oluşur.
+        - Model:       Verilerin muhafaza edilmesinden sorumlu olan modelin en düşük seviyesidir.
+        - Görünüm:     Verilerin tümünün veya bir kısmının kullanıcıya gösterilmesinden sorumludur.
+        - Denetleyici: Model ve Görünüm arasındaki etkileşimleri kontrol eden bir yazılım kodudur.
+      MVC, uygulama mantığını kullanıcı arabirim katmanından ayırdığı ve endişelerin ayrılmasını desteklediği için
+      popülerdir. Denetleyici, uygulama için tüm istekleri alır ve daha sonra görünüm tarafından ihtiyaç duyulan verileri
+      hazırlamak için modelle çalışır.
+      AngularJS MVC tabanlı bir çerçevedir.
+
+      AngularJS uygulaması aşağıdaki üç önemli parçayı içerir:
+        - ng-app   - Bu yönerge bir AngularJS uygulamasını HTML'ye tanımlar ve bağlar.Bu yönerge AngularJS uygulamasının
+                      başlangıcını gösterir.
+        - ng-model - Bu yönerge, AngularJS uygulama verilerinin değerlerini HTML giriş kontrollerine bağlar. Bu yönerge html
+                sayfasıyla ve ng-app yönergesine sahip div içinde kullanılabilecek ".." adında bir model değişkeni oluşturur.
+        - ng-bind  - Bu yönerge, AngularJS Uygulama verilerini HTML etiketlerine bağlar. Bu yöntem kullanıcı metin kutusuna
+                      bir şey girdiğinde html span etiketinde görüntülenecek ad modelini kullanır
+      HTML'yi genişletmek için AngularJS yönergeleri kullanılır. Bunlar ng-öneki ile başlayan özel niteliklerdir.
+        - ng-app - Bu yönerge bir AngularJS Uygulaması başlatır.
+        - ng-init - Bu yönerge uygulama verilerini başlatır.
+        - ng-model - Bu yönerge, AngularJS uygulama verilerinin değerlerini HTML giriş kontrollerine bağlar.
+        - ng-repeat - Bu yönerge, bir koleksiyondaki her öğe için html öğelerini tekrarlar.
+
+      ng-app yönergesi,
+        bir AngularJS Uygulaması başlatır. Kök elemanını tanımlar. AngularJS Uygulaması içeren web sayfası yüklendiğinde
+        uygulamayı otomatik olarak başlatır veya önyükler. Ayrıca AngularJS Uygulamasında çeşitli AngularJS modüllerini
+        yüklemek için kullanılır.
+      ng-init yönergesi,
+        bir AngularJS Uygulama verilerini başlatır. Uygulamada kullanılacak değişkenlere değer katmak için kullanılır.
+      ng-model yönergesi,
+         AngularJS uygulama verilerinin değerlerini HTML giriş kontrollerine bağlar.
+      ng-repeat yönergesi,
+        bir koleksiyondaki her öğe için html öğelerini tekrarlar.
+    -->
+  </head>
+  <body>
+    <h2>Simple Application</h2>
+    <div ng-app = "" ng-init = "countries = [
+      {locale:'en-US',name:'United States'},
+      {locale:'en-GB',name:'United Kingdom'},
+      {locale:'en-FR',name:'France'}
+    ]">
+    <p>Enter your Name: <input type = "text" ng-model = "name"></p>
+        <p>Hello <span ng-bind = "name"></span>!</p>
+        <p>List of Countries with locale:</p>
+        <ol>
+          <li ng-repeat = "c in countries">
+            {{ 'Country: ' + c.name + ', Locale: ' + c.locale }}
+          </li>
+        </ol>
+    </div>
+  </body>
+</html>

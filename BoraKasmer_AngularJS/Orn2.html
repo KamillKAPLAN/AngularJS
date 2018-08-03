@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="../angular.min.js"></script>
+  </head>
+  <body>
+    <!--
+      ng-app    : AngularJs'de çalışılacak block
+      ng-model  : Modelimiz
+      ng-bind   : Tanımlanan modele baglanan alan
+      ng-init   : AngularJs'de kullanılacak değişkenlerin tanımlandığı yer
+      {{ }}     : AngularJs'de ifadeleri tanımlama şeklidir.
+    -->
+    <div ng-app="" ng-init="superbike = {Brand:'Kawasaki',CC:'650'}; place = ['Home','Job','Cinema','IstanbulPark']">
+      <p>The bike is <span ng-bind="superbike.Brand"></span> and It is <span ng-bind="superbike.CC"></span>CC</p>
+      <p>My Place is <span ng-bind="place[0]"></span> but my mind at {{ place[3] }}</p>
+    </div>
+  </body>
+</html>

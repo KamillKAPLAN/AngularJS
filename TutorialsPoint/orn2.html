@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="../angular.min.js"></script>
+    <!--
+      ng-app özniteliğini AngularJS uygulamasının kök HTML öğesine ekleyerek yapılır.
+      ng-controller , bu görünümle hangi denetleyicinin kullanılacağını AngularJS'e bildirir.
+      helloTo.title , AngularJS'e bu konumda HTML'ye helloTo.title adlı "model" değerini yazmasını söyler.
+    -->
+  </head>
+  <body ng-app = "myapp">
+      <div ng-controller = "HelloController">
+        <p>Welcome<b> {{helloTo.title}} </b>to the world of Tutorialspoint!</p>
+      </div>
+      <script>
+        angular.module("myapp", [])
+
+        .controller("HelloController", function($scope) {
+          $scope.helloTo = {};
+          $scope.helloTo.title = "AngularJS";
+        });
+      </script>
+      <!--
+        Bu kod , myapp adındaki açısal modülde HelloController adlı bir denetleyici işlevini kaydeder.
+        Denetleyici işlevine geçirilen $ kapsam parametresi modeldir . Denetleyici işlevi bir helloTo JavaScript nesnesi ekler ve bu nesnede bir başlık alanı ekler.
+      -->
+  </body>
+</html>

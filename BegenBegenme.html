@@ -1,0 +1,57 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="angular.min.js"></script>
+<script>
+  var app = angular
+  .module("dilModul", [])
+  .controller("dilController", function ($scope) {
+
+  var diller = [
+      { adi: "PHP", begen: 0, begenme: 0 },
+      { adi: "C#", begen: 0, begenme: 0 },
+      { adi: "Java", begen: 0, begenme: 0 },
+      { adi: "JavaScript", begen: 0, begenme: 0 }
+    ];
+
+    $scope.diller = diller;
+
+    $scope.begenArttir = function (dil) {
+      dil.begen++;
+    };
+
+    $scope.begenmeArttir = function (dil) {
+      dil.begenme++;
+    };
+  });
+
+</script>
+</head>
+<body ng-app="dilModul">
+<div ng-controller="dilController">
+<table border="1">
+<thead>
+<tr>
+<th>ADI</th>
+<th>BEĞENDİ</th>
+<th>BEĞENMEDİ</th>
+<th>Beğen/Beğenme</th>
+</tr>
+</thead>
+<tbody>
+<tr ng-repeat="dil in diller">
+<td> {{ dil.adi }} </td>
+<td style="text-align:center"> {{ dil.begen }} </td>
+<td style="text-align:center"> {{ dil.begenme }} </td>
+<td>
+<input type="button" ng-click="begenArttir(dil)" value="BEĞEN" />
+<input type="button" ng-click="begenmeArttir(dil)"value="BEĞENME" />
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

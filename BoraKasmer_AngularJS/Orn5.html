@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="../angular.min.js"></script>
+  </head>
+  <body>
+    <!--
+      ng-app        : AngularJs'de çalışılacak block
+      ng-model      : Modelimiz
+      ng-bind       : Tanımlanan modele baglanan alan
+      ng-init       : AngularJs'de kullanılacak değişkenlerin tanımlandığı yer
+      {{ }}         : AngularJs'de ifadeleri tanımlama şeklidir.
+      ng-repeat     : AngularJs'de dataları tek tek dolaşır.Ayni foreach’de olduğı gibi dizi içinde dolaşıp tüm elemanlara ulaşabiliriz
+      ng-controller : Controller lar bir çeşit namespace dirler.İçlerinde  farklı sınıfları tanımlayabiliriz.
+      ng-controller : tanımlanacak olan controller’ı tutar
+    -->
+    <div ng-app="app" ng-controller="bikeController">
+
+      <table>
+        <tr>
+          <td>100km'de yaktığı: </td>
+          <td><input type="text" ng-model="bike.BurnOilLiter"></td>
+        </tr>
+        <tr>
+          <td>Toplam Km: </td>
+          <td><input type="text" ng-model="bike.Km"></td>
+        </tr>
+        <tr>
+          <td>Toplam Harcanan: </td>
+          <td>{{ bike.Calculate() }}</td>
+        </tr>
+      </table><br>
+
+      <ul>
+        <li ng-repeat = "b in models">
+          {{ b.name + " " + b.country }}
+        </li>
+      </ul>
+
+    </div>
+    <script type="text/javascript">
+      var app = angular.module("app", []);
+      app.controller('bikeController', ['$scope', function($scope){
+        $scope.bike = {
+          Brand : "Kawasaki",
+          BurnOilLiter : 5,
+          Km : 60,
+          Calculate : function() {
+            var x = $scope.bike;
+            return (x.BurnOilLiter*x.Km)/100
+          }
+        };
+        $scope.models = [
+          { name : 'Kawasaki', country : 'Japan' },
+          { name : 'Honda', country : 'Japan' },
+          { name : 'Bmw', country : 'German' }
+        ];
+      }])
+    </script>
+  </body>
+</html>
