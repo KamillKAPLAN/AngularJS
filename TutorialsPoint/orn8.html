@@ -4,8 +4,35 @@
     <meta charset="utf-8">
     <title></title>
     <script src="../angular.min.js"></script>
+    <!--
+      Aşağıdaki yönergeler, uygulama verilerini HTML DOM Elements'ın niteliklerine bağlamak için kullanılabilir.
+      - ng-disabled : belirli bir kontrolü devre dışı bırakır.
+      - ng-show     : verilen bir kontrolü gösterir.
+      - ng-hide     : belirli bir kontrolü gizler.
+      - ng-click    : bir AngularJS tıklama olayını temsil eder.
+    -->
   </head>
   <body>
-
+    <h2>AngularJS Sample Application</h2>
+    <div ng-app = "">
+      <table border="0">
+        <tr>
+          <td><input type="checkbox" ng-model = "enableDisableButton">Disble Button</td>
+          <td><button ng-disabled = "enableDisableButton">Click Me!</button></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" ng-model = "showHide1">Show Button</td>
+          <td><button ng-show = "showHide1">Click Me!</button></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" ng-model = "showHide2">Hide Button</td>
+          <td><button ng-hide = "showHide2">Click Me!</button></td>
+        </tr>
+        <tr>
+          <td><p>Toplam tıklama: {{clickCounter}}</p></td>
+          <td><button ng-click = "clickCounter = clickCounter + 1">Click Me!</button></td>
+        </tr>
+      </table>
+    </div>
   </body>
 </html>

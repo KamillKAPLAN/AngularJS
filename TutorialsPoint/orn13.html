@@ -2,10 +2,62 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
-    <script src="../angular.min.js"></script>
+    <title>Angular JS Views</title>
+    <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.min.js"></script>
   </head>
   <body>
+    <!--
+      AngularJS, tek bir sayfada birden çok görünümle Tek Sayfa Uygulamasını destekler. Bunu yapmak için AngularJS
+        ng-view ve ng-template direktifleri ve $routeProvider hizmetleri sağladı.
+      - ng-view etiketi, konfigürasyona göre ilgili görünümün (html veya ng-template görünümü) yerleştirilebileceği bir yer
+          tutucu yaratır.
+      - ng-template yönergesi, script etiketini kullanarak bir html görünümü oluşturmak için kullanılır. Bir denetleyiciyle
+          bir görünümü eşlemek için $routeProvider tarafından kullanılan "id" özelliğini içerir.
+      - $routeProvider, URL'lerin yapılandırmasını ayarlayan, bunları ilgili html sayfası veya ng-template ile eşleştiren
+          ve aynı şekilde bir denetleyici ekleyen temel hizmettir.
+      Ana modül ile bir komut dosyası bloğu tanımlayın ve yönlendirme yapılandırmasını ayarlayın.
+    -->
+    <h2>AngularJS Sample Application</h2>
+     <div ng-app = "mainApp">
+        <p><a href = "#addStudent">Add Student</a></p>
+        <p><a href = "#viewStudents">View Students</a></p>
+        <div ng-view></div>
 
+        <script type = "text/ng-template" id = "addStudent.htm">
+           <h2> Add Student </h2>
+           {{message}}
+        </script>
+
+        <script type = "text/ng-template" id = "viewStudents.htm">
+           <h2> View Students </h2>
+           {{message}}
+        </script>
+     </div>
+
+     <script>
+        var mainApp = angular.module("mainApp", ['ngRoute']);
+        // ngRoute modülü, AngularJS uygulamaları için yönlendirme ve derin bağlantı hizmetleri ve yönergeleri sağlar.
+        mainApp.config(['$routeProvider', function($routeProvider) {
+           $routeProvider.when('/addStudent', {
+              templateUrl: 'addStudent.htm',
+              controller: 'AddStudentController'
+           }).when('/viewStudents', {
+              templateUrl: 'viewStudents.htm',
+              controller: 'ViewStudentsController'
+           }).otherwise({
+              redirectTo: '/addStudent'
+           });
+        }]);
+
+        mainApp.controller('AddStudentController', function($scope) {
+           $scope.message = "This page will be used to display add student form";
+        });
+
+        mainApp.controller('ViewStudentsController', function($scope) {
+           $scope.message = "This page will be used to display all the students";
+        });
+
+     </script>
   </body>
 </html>

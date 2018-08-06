@@ -4,8 +4,82 @@
     <meta charset="utf-8">
     <title></title>
     <script src="../angular.min.js"></script>
+    <!--
+      Filtreler, verileri değiştirmek için kullanılır ve | karakterini kullanarak ifade veya yönergelere göre
+      kulüplenebilir. Yaygın olarak kullanılan filtreler;
+      - uppercase   : bir metni büyük harfli metne dönüştürür.
+      - lowercase   : bir metni küçük harfli metne dönüştürür.
+      - currency    : metni bir para biçiminde biçimlendirir.
+      - filter      : diziyi, sağlanan ölçütlere göre bir alt kümesine göre filtreleyin.
+      - orderby     : diziyi sağlanan ölçütlere göre sıralar.
+    -->
   </head>
   <body>
+    <h2>Angular JS Filters</h2>
+    <div ng-app = "mainApp" ng-controller = "studentController">
+      <table border = "0">
+        <tr>
+          <td>Enter first name:</td>
+          <td><input type="text" ng-model = "student.firstName"></td>
+        </tr>
+        <tr>
+          <td>Enter last name: </td>
+          <td><input type="text" ng-model = "student.lastName"></td>
+        </tr>
+        <tr>
+          <td>Enter fees: </td>
+          <td><input type="text" ng-model = "student.frees"></td>
+        </tr>
+        <tr>
+          <td>Enter subject: </td>
+          <td><input type="text" ng-model = "subjectName"></td>
+        </tr>
+      </table> <br>
+      <table border = "0">
+        <tr>
+          <td>Name in UpperCase: </td>
+          <td>{{student.fullName() | uppercase}}</td>
+        </tr>
+        <tr>
+          <td>Name in LoweCase: </td>
+          <td>{{student.fullName() | lowercase}}</td>
+        </tr>
+        <tr>
+          <td>fees: </td>
+          <td>{{student.frees | currency}}</td>
+        </tr>
+        <tr>
+          <td>Subect: </td>
+          <td>
+            <ul>
+              <li ng-repeat = "s in student.subjects | filter: subjectName | orderBy: 'marks'">
+                {{s.name + ', marks: ' + s.marks}}
+              </li>
+            </ul>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <script>
+        var mainApp = angular.module("mainApp", []);
+        mainApp.controller('studentController', function($scope) {
 
+          $scope.student = {
+            firstName : "Kamil",
+            lastName  : "Kaplan",
+            frees     : 500,
+            subjects  : [
+              {name: 'Physics', marks:70},
+              {name: 'Chemistry', marks:80},
+              {name: 'Math', marks:65}
+            ],
+            fullName  : function() {
+              var studentObject;
+              studentObject = $scope.student;
+              return studentObject.firstName + " " + studentObject.lastName;
+            }
+          };
+        });
+    </script>
   </body>
 </html>

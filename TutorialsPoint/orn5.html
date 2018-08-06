@@ -5,7 +5,31 @@
     <title></title>
     <script src="../angular.min.js"></script>
   </head>
+  <!--
+    AngularJS uygulaması esas olarak uygulamadaki veri akışını kontrol etmek için kontrolörlere dayanır. Bir controller
+    ng-controller yönergesi kullanılarak tanımlanır. Bir controller, öznitelikleri/özellikleri ve işlevleri içeren bir
+    JavaScript nesnesidir. Her bir controller $ kapsamı, controller'ın denetlemek istediği uygulamaya/modüle başvuran
+    bir parametre olarak kabul eder.
+  -->
   <body>
-
+    <h2>AngularJS Sample Application</h2>
+    <div ng-app="mainApp" ng-controller = "studentController">
+      Enter firstName: <input type="text" ng-model = "student.firstName"> <br> <br>
+      Enter lastName: <input type="text" ng-model = "student.lastName"> <br> <br>
+        You are entering : {{ student.fullName() }}
+    </div>
+    <script>
+      var mainApp = angular.module("mainApp", []);
+      mainApp.controller('studentController', function($scope) {
+        $scope.student = {
+          firstName : "Kamil",
+          lastName  : "KAPLAN",
+          fullName  : function() {
+            var studentObject = $scope.student;
+            return studentObject.firstName + " " + studentObject.lastName;
+          }
+        }
+      });
+    </script>
   </body>
 </html>

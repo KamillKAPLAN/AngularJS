@@ -4,8 +4,25 @@
     <meta charset="utf-8">
     <title></title>
     <script src="../angular.min.js"></script>
+    <!--
+      İfadeler, uygulama verilerini html'ye bağlamak için kullanılır. İfadeler, {{expression}} gibi çift parantez içine
+      yazılır. İfadeler, ng-bind yönergeleriyle aynı şekilde davranır. AngularJS uygulama ifadeleri, saf javascript
+      ifadeleridir ve kullanıldıkları verileri verir.
+    -->
   </head>
   <body>
-
+      <h1>Sample Application</h1>
+      <div ng-app = "" ng-init = "
+        quantity = 1; cost = 30;
+        student = {
+          firstname:'Mahesh',
+          lastname:'Parashar',
+          rollno:101 };
+        marks = [80,90,75,73,60]">
+         <p>Hello <b>{{student.firstname + " " + student.lastname}}</b>!</p>
+         <p>Expense on Books : <b>{{cost * quantity}}</b> Rs</p>
+         <p>Roll No: <b>{{student.rollno}}</b></p>
+         <p>Marks(Math): <b>{{marks[3]}}</b></p>
+      </div>
   </body>
 </html>

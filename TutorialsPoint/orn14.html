@@ -4,8 +4,44 @@
     <meta charset="utf-8">
     <title></title>
     <script src="../angular.min.js"></script>
+    <!--
+      Scope controller'ın view'e katılma rolünü oynayan özel bir js nesnesidir. Scope, model verilerini içerir.Controller'da,
+        model verilerine $scope nesnesi aracılığıyla erişilir. Scope controller'a özeldir.
+        İç controller^ı tanımlarsak, çocuk controller üst controller kapsamını devralır.
+        - $scope, constructor tanımı sırasında controller'a ilk argüman olarak iletilir.
+        - $scope.message ve $scope.type, HTML sayfasında kullanılacak olan modellerdir.
+        - Fonksiyonları $scope içinde de tanımlayabiliriz.
+    -->
   </head>
   <body>
+    <h2>AngularJS Sample Application</h2>
+      <div ng-app = "mainApp" ng-controller = "shapeController">
+         <p>{{message}} <br/> {{type}} </p>
+         <div ng-controller = "circleController">
+            <p>{{message}} <br/> {{type}} </p>
+         </div>
+         <div ng-controller = "squareController">
+            <p> {{message}} <br> {{type}} </p>
+         </div>
+      </div>
+      <script>
+         var mainApp = angular.module("mainApp", []);
 
+         mainApp.controller("shapeController", function($scope) {
+            $scope.message = "In shape controller";
+            $scope.type = "Shape";
+            $scope.msg = "Shape";
+         });
+
+         mainApp.controller("circleController", function($scope) {
+            $scope.message = "In circle controller";
+         });
+
+         mainApp.controller("squareController", function($scope) {
+            $scope.message = "In square controller";
+            $scope.type = "Square";
+         });
+
+      </script>
   </body>
 </html>

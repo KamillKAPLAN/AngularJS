@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <!--    AngularJS - Bağımlılık Enjeksiyonu
+      Bağımlılık Enjeksiyon, bileşenlerin bileşen içerisinde kodlanması yerine bağımlılıklarının verildiği bir yazılım
+       tasarım örüntüsüdür. Bu, bir bileşenin bağımlılığı bulmasını ve bağımlılıkların yapılandırılmasını sağlar. Bu,
+       bileşenlerin tekrar kullanılabilir, sürdürülebilir ve test edilebilir olmasına yardımcı olur. AngularJS yüce
+       Bağımlılık Enjeksiyon mekanizması sağlar. Bağımlılıklar olarak birbirine enjekte edilebilen aşağıdaki temel
+       bileşenleri sağlar.
+
+       value    - basit javascript nesnesidir ve yapılandırma aşamasında değerleri controller'a aktarmak için kullanılır.
+
+       factory  - değeri döndürmek için kullanılan bir işlevdir. Bir servis veya kontrol cihazı gerektiğinde talep üzerine
+        değer yaratır. Normalde değeri hesaplamak ve döndürmek için factory fonk. kullanır.
+
+       service  - belirli görevleri gerçekleştirmek için bir dizi işlev içeren bir tek javascript nesnesidir. Servisler
+        service () işlevlerini kullanarak tanımlanır ve ardından controller'a enjekte edilir.
+
+       provider - AngularJS tarafından yapılandırma aşamasında (AngularJS'nin önyükleme yaptığı aşamada) services,
+        factory vb. oluşturmak için dahili olarak kullanılır. Aşağıda, daha önce oluşturduğumuz MathService'i oluşturmak
+        için kullanılan komut dosyası kullanılabilir. Provider, value/service/factory döndürmek için kullanılan
+        get() yöntemiyle özel bir factory fonksiyonudur.
+
+       constant - değerlerin yapılandırma aşamasında geçirilememesi gerçeğini göz önünde bulundurarak yapılandırma
+        aşamasında değerleri geçmek için kullanılır.
+    -->
+  </head>
+  <body>
+    <h2>AngularJS Sample Application</h2>
+     <div ng-app = "mainApp" ng-controller = "CalcController">
+        <p>Enter a number: <input type = "number" ng-model = "number" /></p>
+        <button ng-click = "square()">X<sup>2</sup></button>
+        <p>Result: {{result}}</p>
+     </div>
+     <script>
+       var mainApp = angular.module("mainApp", []);
+
+       // value
+       mainApp.value("defaultInput", 5);
+
+       // factory
+       mainApp.factory('MathService', function() {
+          var factory = {};
+
+          factory.multiply = function(a, b) {
+             return a * b;
+          }
+          return factory;
+       });
+
+       // service
+       mainApp.service('CalcService', function(MathService){
+          this.square = function(a) {
+             return MathService.multiply(a,a);
+          }
+       });
+
+       // provider
+       mainApp.config(function($provide) {
+          $provide.provider('MathService', function() {
+             this.$get = function() {
+                var factory = {};
+
+                factory.multiply = function(a, b) {
+                   return a * b;
+                }
+                return factory;
+             };
+          });
+       });
+
+       mainApp.controller('CalcController', function($scope, CalcService, defaultInput) {
+          $scope.number = defaultInput;
+          $scope.result = CalcService.square($scope.number);
+
+          $scope.square = function() {
+             $scope.result = CalcService.square($scope.number);
+          }
+       });
+       /*
+          constant
+          mainApp.constant("configParam", "constant value");
+       */
+     </script>
+  </body>
+</html>
